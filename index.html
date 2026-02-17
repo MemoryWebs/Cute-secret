@@ -6,35 +6,51 @@
 <title>A Little Secret 🤍</title>
 
 <style>
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #fff0f5, #ffe6f0);
     font-family: Arial, sans-serif;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     overflow: hidden;
 }
 
+/* Landing Screen */
+
 #startScreen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
+#startScreen h2 {
+    color: #ff4d6d;
+    margin-bottom: 20px;
+}
+
 button {
-    padding: 15px 25px;
-    font-size: 18px;
+    padding: 14px 28px;
+    font-size: 16px;
     border: none;
     border-radius: 30px;
-    background-color: pink;
+    background-color: #ff4d6d;
     color: white;
     cursor: pointer;
     transition: 0.3s;
 }
 
 button:hover {
-    background-color: hotpink;
+    background-color: #e6005c;
 }
+
+/* Video Section */
 
 #videoContainer {
     display: none;
@@ -46,27 +62,34 @@ button:hover {
 }
 
 video {
-    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     height: 100%;
-    object-fit: cover;
+    width: auto;
+    transform: translate(-50%, -50%);
 }
+
+/* Love Text */
 
 #loveText {
     position: absolute;
-    top: 20%;
+    top: 15%;
     width: 100%;
     text-align: center;
-    font-size: 40px;
-    color: #ff4d6d;
+    font-size: 32px;
+    color: white;
     font-weight: bold;
     opacity: 0;
     transition: opacity 2s ease-in-out;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
+
+/* Floating Hearts */
 
 .heart {
     position: absolute;
-    color: red;
-    font-size: 24px;
+    font-size: 22px;
     animation: float 5s linear infinite;
 }
 
@@ -86,17 +109,23 @@ video {
 <body>
 
 <div id="startScreen">
-    <button onclick="startSecret()">Tap to reveal a secret 🐻</button>
+    <h2>Long distance but still close 🤍</h2>
+    <button onclick="startSecret()">Tap to reveal the secret 🐻</button>
 </div>
 
 <div id="videoContainer">
     <video id="secretVideo" src="cute.mp4"></video>
-    <div id="loveText">I Love You ❤️</div>
+    <div id="loveText"></div>
 </div>
 
 <script>
+
+// 🔥 YOU CHANGE THIS NAME FOR EACH CLIENT
+const partnerName = "Aduu";
+
 function startSecret() {
     document.getElementById("startScreen").style.display = "none";
+
     const videoContainer = document.getElementById("videoContainer");
     const video = document.getElementById("secretVideo");
     const loveText = document.getElementById("loveText");
@@ -105,6 +134,7 @@ function startSecret() {
     video.play();
 
     video.onended = function() {
+        loveText.innerHTML = "I Love You, " + partnerName + " ❤️";
         loveText.style.opacity = "1";
         createHearts();
     };
@@ -116,6 +146,7 @@ function createHearts() {
         heart.classList.add("heart");
         heart.innerHTML = "❤️";
         heart.style.left = Math.random() * 100 + "vw";
+        heart.style.color = "pink";
         document.body.appendChild(heart);
 
         setTimeout(() => {
@@ -123,6 +154,7 @@ function createHearts() {
         }, 5000);
     }, 300);
 }
+
 </script>
 
 </body>
