@@ -13,83 +13,64 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #fff0f5, #ffe6f0);
-    font-family: Arial, sans-serif;
     height: 100vh;
+    background: linear-gradient(135deg, #fdfbfb, #ffe4ec);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
     overflow: hidden;
+}
+
+/* Card Container */
+
+.container {
+    width: 90%;
+    max-width: 380px;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 40px 20px;
+    transition: 0.5s ease;
 }
 
 /* Landing Screen */
 
-#startScreen {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-#startScreen h2 {
-    color: #ff4d6d;
+h2 {
+    color: #ff4d88;
     margin-bottom: 20px;
+    font-weight: 500;
 }
 
 button {
-    padding: 14px 28px;
-    font-size: 16px;
+    padding: 12px 28px;
     border: none;
     border-radius: 30px;
-    background-color: #ff4d6d;
+    background: linear-gradient(to right, #ff6fa5, #ff4d88);
     color: white;
+    font-size: 15px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
 button:hover {
-    background-color: #e6005c;
+    transform: scale(1.05);
 }
 
-/* Video Section */
-
-#videoContainer {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+/* Video */
 
 video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 100%;
-    width: auto;
-    transform: translate(-50%, -50%);
-}
-
-/* Love Text */
-
-#loveText {
-    position: absolute;
-    top: 15%;
     width: 100%;
-    text-align: center;
-    font-size: 32px;
-    color: white;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 20px;
+    display: none;
 }
 
-/* Floating Hearts */
+/* Hearts */
 
 .heart {
     position: absolute;
-    font-size: 22px;
+    font-size: 20px;
     animation: float 5s linear infinite;
 }
 
@@ -108,34 +89,24 @@ video {
 
 <body>
 
-<div id="startScreen">
-    <h2>Long distance but still close 🤍</h2>
-    <button onclick="startSecret()">Tap to reveal the secret 🐻</button>
-</div>
-
-<div id="videoContainer">
-    <video id="secretVideo" src="cute.mp4"></video>
-    <div id="loveText"></div>
+<div class="container">
+    <h2>Long distance… but still magical 🤍</h2>
+    <button onclick="startSecret()">Tap for a surprise 🐻</button>
+    <video id="secretVideo" src="cute.mp4" playsinline></video>
 </div>
 
 <script>
 
-// 🔥 YOU CHANGE THIS NAME FOR EACH CLIENT
-const partnerName = "Aduu";
-
 function startSecret() {
-    document.getElementById("startScreen").style.display = "none";
-
-    const videoContainer = document.getElementById("videoContainer");
+    const button = document.querySelector("button");
     const video = document.getElementById("secretVideo");
-    const loveText = document.getElementById("loveText");
 
-    videoContainer.style.display = "block";
+    button.style.display = "none";
+    video.style.display = "block";
+
     video.play();
 
     video.onended = function() {
-        loveText.innerHTML = "I Love You, " + partnerName + " ❤️";
-        loveText.style.opacity = "1";
         createHearts();
     };
 }
@@ -146,7 +117,7 @@ function createHearts() {
         heart.classList.add("heart");
         heart.innerHTML = "❤️";
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.color = "pink";
+        heart.style.color = "#ff4d88";
         document.body.appendChild(heart);
 
         setTimeout(() => {
